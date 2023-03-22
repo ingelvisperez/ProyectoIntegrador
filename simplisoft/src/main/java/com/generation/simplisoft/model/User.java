@@ -33,8 +33,9 @@ public class User {
         private Integer idUser;
                
         private String rut;
-                
-        private String username;
+        
+        @Column(name = "user_name")
+        private String userName;
         
         @Column(name = "user_password")               
         private String userPassword;
