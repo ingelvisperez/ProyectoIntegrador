@@ -5,18 +5,18 @@ USE simplisoft_V1;
 CREATE TABLE Users (
 	id_user INTEGER UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
     rut VARCHAR(10) NOT NULL,
-    username VARCHAR(50) NOT NULL,
-    userPassword VARCHAR(50) NOT NULL,
+    user_name VARCHAR(50) NOT NULL,
+    user_password VARCHAR(50) NOT NULL,
     email VARCHAR(80) NOT NULL,
     address VARCHAR(80) NOT NULL,
-    userStatus BOOLEAN,
+    user_status BOOLEAN,
     phone VARCHAR(50) NOT NULL,
     fk_id_role INTEGER UNSIGNED
 );
 
 CREATE TABLE Roles (
 	id_role INTEGER UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
-	roleName VARCHAR(50) NOT NULL
+	role_name VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE Tickets (
@@ -41,7 +41,7 @@ id_order_service INTEGER UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
 comment_initial TEXT,
 comment_technical TEXT,
 comment_client TEXT, 
-files BLOB,
+files VARCHAR(100),
 status_order VARCHAR (30),
 order_creation_date DATETIME,
 order_close_date DATETIME,
