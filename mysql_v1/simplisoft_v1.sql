@@ -1,6 +1,6 @@
-CREATE SCHEMA simplisoft_V1;
+CREATE SCHEMA simplisoft_bd;
 
-USE simplisoft_V1;
+USE simplisoft_bd;
 
 CREATE TABLE Users (
 	id_user INTEGER UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
