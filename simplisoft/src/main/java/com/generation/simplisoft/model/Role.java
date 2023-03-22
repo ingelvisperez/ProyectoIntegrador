@@ -1,5 +1,6 @@
 package com.generation.simplisoft.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import java.util.List;
 import javax.persistence.GeneratedValue;
@@ -11,7 +12,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity(name = "Roles") // Se usa para comunicarnos con la tabla que queremos, en este caso "Roles"
+@Entity(name = "roles") // Se usa para comunicarnos con la tabla que queremos, en este caso "Roles"
 
 // Anotaciones para el uso de Lombok
 @AllArgsConstructor
@@ -28,7 +29,9 @@ public class Role {
     /*----- El atributo ID debe venir justo después de las sentencias de arriba ---- */
     /* ---------- Los atributos coinciden con las columnas de la tabla ------------- */
     /* ----------------------------------------------------------------------------- */
-    private Integer id_role;
+    @Column(name = "id_role")
+    private Integer idRole;
+    @Column(name = "role_name")
     private String roleName;
     
 }

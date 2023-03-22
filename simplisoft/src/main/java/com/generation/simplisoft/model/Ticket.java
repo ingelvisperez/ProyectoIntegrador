@@ -1,10 +1,16 @@
 package com.generation.simplisoft.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+
+import java.time.LocalDateTime;
 import java.util.List;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,10 +34,20 @@ public class Ticket {
         /*----- El atributo ID debe venir justo después de las sentencias de arriba ---- */
         /* ---------- Los atributos coinciden con las columnas de la tabla ------------- */
         /* ----------------------------------------------------------------------------- */
-        private Integer id_ticket;
-        //Pregunta el tipo de variable DATATIME para la fechas
-        private String ticket_creation_date;
-        private String ticket_close_date;
-        private String ticket_status;           //Abierto, cerrado, en proceso.....
-        private Integer fk_id_role;
+        @Column(name = "id_ticket")
+        private Integer idTicket;
+        
+        @CreationTimestamp          //establece automáticamente en la fecha y hora en que se inserta la entidad en la base de datos
+        @Column(name = "ticket_creation_date")
+        private LocalDateTime ticketCreationDate;        
+        
+        @UpdateTimestamp            //permite registrar automáticamente la fecha y hora de la última actualización
+        @Column(name = "ticket_close_date")
+        private LocalDateTime ticketCloseDate;
+        
+        @Column(name = "ticket_status")
+        private String ticketStatus;           //Abierto, cerrado, en proceso.....
+        
+        @Column(name = "fk_id_ticketuser") 
+        private Integer fkIdTicketuser;
 }

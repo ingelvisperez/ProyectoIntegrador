@@ -1,5 +1,6 @@
 package com.generation.simplisoft.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import java.util.List;
 import javax.persistence.GeneratedValue;
@@ -11,7 +12,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity(name = "Devices") // Se usa para comunicarnos con la tabla que queremos, en este caso "Roles"
+@Entity(name = "Devices") // Se usa para comunicarnos con la tabla que queremos, en este caso "Devices"
 
 // Anotaciones para el uso de Lombok
 @AllArgsConstructor
@@ -27,10 +28,21 @@ public class Device {
         /*----- El atributo ID debe venir justo después de las sentencias de arriba ---- */
         /* ---------- Los atributos coinciden con las columnas de la tabla ------------- */
         /* ----------------------------------------------------------------------------- */
-        private Integer id_device;
-        private String device_type;     //tipo de dispositivo
-        private String device_brand;    // marca del dispositivo
-        private String device_model;    // Modelo del dispositivo
-        private String serial_number;
-        private Integer fk_id_user;
+        @Column(name = "id_device")
+        private Integer idDevice;
+        
+        @Column(name = "device_type")
+        private String deviceType;     //tipo de dispositivo
+        
+        @Column(name = "device_brand")
+        private String deviceBrand;    // marca del dispositivo
+        
+        @Column(name = "device_model")
+        private String deviceModel;    // Modelo del dispositivo
+        
+        @Column(name = "serial_number")       
+        private String serialNumber;
+        
+        @Column(name = "fk_id_user")       
+        private Integer fkIdUser;
 }

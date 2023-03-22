@@ -1,5 +1,6 @@
 package com.generation.simplisoft.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import java.util.List;
 import javax.persistence.GeneratedValue;
@@ -28,13 +29,25 @@ public class User {
         /*----- El atributo ID debe venir justo después de las sentencias de arriba ---- */
         /* ---------- Los atributos coinciden con las columnas de la tabla ------------- */
         /* ----------------------------------------------------------------------------- */
-        private Integer id_user;
+        @Column(name = "id_user")        
+        private Integer idUser;
+               
         private String rut;
+                
         private String username;
+        
+        @Column(name = "user_password")               
         private String userPassword;
+               
         private String email;
+                
         private String address;
-        private Boolean userStatus; // Usuario Activo o  Inactivo
+        
+        @Column(name = "user_status")               
+        private Boolean userStatus; // Usuario Activo(1) o  Inactivo (0)
+               
         private String phone;
-        private Integer fk_id_role;
+        
+        @Column(name = "fk_id_role")                      
+        private Integer fkIdRole;
 }
