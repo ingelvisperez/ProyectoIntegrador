@@ -104,12 +104,21 @@ INSERT INTO devices (device_type, device_brand, device_model, serial_number, fk_
 ("televisor", "LG", "LG8000", "OE8SE",  5);
 SELECT * FROM devices;
 
-INSERT INTO Orders (comment_initial, comment_technical, comment_client, files, status_order, order_creation_date, oreder_close_date, fk_id_device, fk_id_ticket) VALUES
+INSERT INTO Orders (comment_initial, comment_technical, comment_client, files, status_order, order_creation_date, order_close_date, fk_id_device, fk_id_ticket) VALUES
 ("Pantalla rota","Se realiza cambio de pantalla y limpieza de componente sulfatados","Se realiza cambio de pantalla y limpieza a mainboard","google.com","Reparado","2023-02-10 17:15:25","2023-02-12 17:15:25",1,1),
 ("TV no enciende","Se realiza limpieza de componente sulfatados","Se realiza soldadura a etapa de alimentacion","youtube.com","En reparación","2023-02-12 17:15:25","2023-02-15 17:15:25",2,2),
-("Sin wifi","Se sustituye módulo wifi","Se deja operativo con mosulo wifi nuevo","youtube.com","reparado","2023-02-12 17:15:25","2023-02-15 17:15:25",3,3),
-("Sin wifi","Se sustituye módulo wifi","Se deja operativo con mosulo wifi nuevo","youtube.com","reparado","2023-02-12 17:15:25","2023-02-15 17:15:25",3,3),
+("Sin wifi","Se sustituye módulo wifi","Se deja operativo con módulo wifi nuevo","youtube.com","reparado","2023-03-16 13:30:00", "2023-03-16 18:15:00",3,3),
+("Sin wifi","Se sustituye módulo wifi","Se deja operativo con módulo wifi nuevo","youtube.com","reparado","2023-03-18 10:22:00", "2023-03-18 17:55:00",4,4),
+("Sin Recepcion","Se sustituye módulo Rx","Se deja operativo con módulo Rx nuevo","generation.com","Sin Revisar","2023-03-18 10:22:00", "2023-03-18 17:55:00",5,4),
+("Sin Recepcion","Se sustituye módulo Rx","Se deja operativo con módulo Rx nuevo","generation.com","Sin Revisar","2023-03-18 10:22:00", "2023-03-18 17:55:00",6,4);
 
-(,,,,,,,,,),
-(,,,,,,,,,);
+SELECT * FROM Orders;
+
+SELECT * FROM Orders 
+INNER JOIN Tickets ON Tickets.id_ticket = Orders.fk_id_ticket 
+INNER JOIN Users ON Tickets.fk_id_ticketuser = Users.id_user;
+
+
+
+
  
