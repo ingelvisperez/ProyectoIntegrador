@@ -33,7 +33,12 @@ public class User {
         private Integer idUser;
                
         private String rut;
+<<<<<<< HEAD
         @Column(name = "user_name")                
+=======
+        
+        @Column(name = "user_name")
+>>>>>>> 30419626f5a5527e957c2755ca06651e197c4fd1
         private String userName;
         
         @Column(name = "user_password")               
