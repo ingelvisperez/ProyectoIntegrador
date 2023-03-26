@@ -68,9 +68,14 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    // Método para BUSCAR/ENCONTRAR a TODOS
+    // Método para BUSCAR un usuario por Id
     public List<User> findUserById(Integer id_user){
         return userRepository.findUserByID(id_user);
+    }
+
+    //Metodo para encontrar un usuario por el Rut
+    public List<User> findUserByRut(String rut){
+        return userRepository.findUserByRut(rut);
     }
 
 }

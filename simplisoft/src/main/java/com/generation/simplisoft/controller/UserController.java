@@ -36,19 +36,19 @@ Java serializados en formato JSON o XML.
 @RestController
 
 public class UserController {
-    
+
     public UserService userService;
-    
+
     /*
-    * Se inicia el Constructor
-    * La anotación @Autowired se puede usar en el constructor
-    * para inyectar la instancia de
-    * UserService en la variable de instancia userService.
-    * 
-    * Esto se hace mediante la funcionalidad de la inyección de
-    * dependencias de Spring Framework.
-    */
-    
+     * Se inicia el Constructor
+     * La anotación @Autowired se puede usar en el constructor
+     * para inyectar la instancia de
+     * UserService en la variable de instancia userService.
+     * 
+     * Esto se hace mediante la funcionalidad de la inyección de
+     * dependencias de Spring Framework.
+     */
+
     public UserController(@Autowired UserService userService) {
         this.userService = userService;
     }
@@ -78,13 +78,22 @@ public class UserController {
     @GetMapping("/user/FindAll")
     public List<User> getUser() {
         return userService.findAll();
-    } 
-    
-    // GET: Para obtener los datos de un usuario en la BD
+    }
+
+    // GET: Para obtener los datos de un usuario usando el ID
     @GetMapping("/user/FindUserById/{id_user}")
     public List<User> getUserById(@PathVariable Integer id_user) {
         return userService.findUserById(id_user);
-    }     
+    }
+
+    // GET: Para obtener los datos de un usuario usando el Rut
+    @GetMapping("/user/FindUserByRut/{rut}")
+    public List<User> getUserByRut(@PathVariable String rut) {
+        return userService.findUserByRut(rut);
+    }
+
+
+
 
 
 }

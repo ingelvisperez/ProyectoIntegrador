@@ -18,4 +18,14 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 
      @Query(value = "SELECT * FROM Users WHERE id_user = ?1", nativeQuery = true)
      List <User> findUserByID(Integer id_user);
-}
+
+     @Query(value= "SELECT * FROM Users WHERE rut LIKE ?1", nativeQuery = true)
+     List<User> findUserByRut(String rut);
+
+
+
+
+
+
+
+}//Fin de interface
