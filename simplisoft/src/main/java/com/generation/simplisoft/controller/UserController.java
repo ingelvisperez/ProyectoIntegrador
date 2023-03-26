@@ -78,5 +78,13 @@ public class UserController {
     @GetMapping("/user/FindAll")
     public List<User> getUser() {
         return userService.findAll();
-    }    
+    } 
+    
+    // GET: Para obtener los datos de un usuario en la BD
+    @GetMapping("/user/FindUserById/{id_user}")
+    public List<User> getUserById(@PathVariable Integer id_user) {
+        return userService.findUserById(id_user);
+    }     
+
+
 }
