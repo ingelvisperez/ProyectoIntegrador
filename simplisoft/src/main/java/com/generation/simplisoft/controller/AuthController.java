@@ -1,12 +1,18 @@
 package com.generation.simplisoft.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,26 +27,58 @@ import com.generation.simplisoft.service.MyUserDetailsService;
 @RequestMapping("/auth")
 
 public class AuthController {
-    
-    //Clase de spring security que permite encriptar contraseña
+
+    // Clase de spring security que permite encriptar contraseña
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-        //Inyección de dependencia del service donde está el método de crear usuario
-        @Autowired
-        private MyUserDetailsService myUserDetailsService;
+    // Inyección de dependencia del service donde está el método de crear usuario
+    @Autowired
+    private MyUserDetailsService myUserDetailsService;
 
-        //Endpoint de registro 
-        @PostMapping("/register")
-        public ResponseEntity<User> register(@RequestBody UserRegistroDTO userRegistroDTO) {
-            
-            String encryptedPassword = passwordEncoder.encode(userRegistroDTO.getUserPassword()); // Toma la contraseña y la encripta
-            
-            userRegistroDTO.setUserPassword(encryptedPassword); // La contraseña encriptada se setea a userRegistroDTO
-            
-            User usuarioRegistrado = myUserDetailsService.createUser(userRegistroDTO);  // Creamos el usuario llamando a createUser
-            
-            return new ResponseEntity<>(usuarioRegistrado, HttpStatus.CREATED);
-        }
+    // Endpoint de registro
+    @PostMapping("/register")
+    public ResponseEntity<User> register(@RequestBody UserRegistroDTO userRegistroDTO) {
 
-} //Fin de AuthController
+        String encryptedPassword = passwordEncoder.encode(userRegistroDTO.getUserPassword()); // Toma la contraseña y la
+                                                                                              // encripta
+
+        userRegistroDTO.setUserPassword(encryptedPassword); // La contraseña encriptada se setea a userRegistroDTO
+
+        User usuarioRegistrado = myUserDetailsService.createUser(userRegistroDTO); // Creamos el usuario llamando a
+                                                                                   // createUser
+
+        return new ResponseEntity<>(usuarioRegistrado, HttpStatus.CREATED);
+    }
+
+    // PUT: Para editar datos en la BD
+    @PutMapping("/Update")
+    public void updateUser(@RequestBody User user) {
+        myUserDetailsService.updateUser(user);
+    }
+
+    // DELETE: Eliminar/Borrar datos de BD
+    @DeleteMapping("/Delete/{id}")
+    public void deleteUser(@PathVariable Integer id) {
+        myUserDetailsService.deleteUser(id);
+    }
+
+    // GET: Para obtener datos de la BD
+    @GetMapping("/FindAll")
+    public List<User> getUser() {
+        return myUserDetailsService.findAll();
+    }
+
+    // GET: Para obtener los datos de un usuario usando el ID
+    @GetMapping("/FindUserById/{id_user}")
+    public List<User> getUserById(@PathVariable Integer id_user) {
+        return myUserDetailsService.findUserById(id_user);
+    }
+
+    // GET: Para obtener los datos de un usuario usando el Rut
+    @GetMapping("/FindUserByRut/{rut}")
+    public List<User> getUserByRut(@PathVariable String rut) {
+        return myUserDetailsService.findUserByRut(rut);
+    }
+
+} // Fin de AuthController
