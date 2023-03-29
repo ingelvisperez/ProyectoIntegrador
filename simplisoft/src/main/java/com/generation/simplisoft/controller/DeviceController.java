@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.generation.simplisoft.model.Device;
+import com.generation.simplisoft.model.DeviceRegistroDTO;
 import com.generation.simplisoft.service.DeviceService;
 
 //se debe especificar que es una clase de tipo controlador
@@ -56,10 +57,10 @@ public class DeviceController {
     /* Métodos POST / GET / DELETE / PUT */
     /* --------------------------------- */
 
-    // POST: Para ingresar datos a la BD
-    @PostMapping("/device/save")
-    public void saveDevice(@RequestBody Device device) {
-        deviceService.saveDevice(device);
+    // POST: Para ingresar/registrar datos a la BD
+    @PostMapping("/device/register")
+    public void registerDevice(@RequestBody DeviceRegistroDTO deviceRegistroDTO) {
+        deviceService.createDevice(deviceRegistroDTO);
     }
 
     // PUT: Para editar datos en la BD

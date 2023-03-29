@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.generation.simplisoft.model.Order;
+import com.generation.simplisoft.model.OrderRegistroDTO;
 import com.generation.simplisoft.service.OrderService;
 
 //se debe especificar que es una clase de tipo controlador
@@ -56,10 +57,10 @@ public class OrderController {
     /* Métodos POST / GET / DELETE / PUT */
     /* --------------------------------- */
 
-    // POST: Para ingresar datos a la BD
-    @PostMapping("/order/save")
-    public void saveOrder(@RequestBody Order order) {
-        orderService.saveOrder(order);
+    // POST: Para ingresar/registrar ordenes a la BD
+    @PostMapping("/order/register")
+    public void registerOrder(@RequestBody OrderRegistroDTO orderRegistroDTO) {
+        orderService.createOrder(orderRegistroDTO);
     }
 
     // PUT: Para editar datos en la BD

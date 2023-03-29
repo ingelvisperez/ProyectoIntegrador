@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import com.generation.simplisoft.model.Device;
+import com.generation.simplisoft.model.DeviceRegistroDTO;
 import com.generation.simplisoft.repository.DeviceRepository;
 
 @Service
@@ -46,8 +47,15 @@ public class DeviceService {
         inyecto en la clase.    
     */ 
 
-    public void saveDevice(Device device){
-        this.deviceRepository.save(device);
+    //Método para crear un nuevo dispositivo
+    public Device createDevice(DeviceRegistroDTO deviceRegistroDTO) {
+        Device deviceCreation = new Device();
+        deviceCreation.setDeviceType(deviceRegistroDTO.getDeviceType());
+        deviceCreation.setDeviceBrand(deviceRegistroDTO.getDeviceBrand());
+        deviceCreation.setDeviceModel(deviceRegistroDTO.getDeviceModel());
+        deviceCreation.setSerialNumber(deviceRegistroDTO.getSerialNumber());
+        deviceCreation.setFkIdUser(deviceRegistroDTO.getFkIdUser());
+        return deviceRepository.save(deviceCreation);
     }
 
     // Método ACTUALIZAR/EDITAR/UPDATE
@@ -64,6 +72,5 @@ public class DeviceService {
     public List<Device> findAll(){
         return deviceRepository.findAll();
     }
-
 
 }

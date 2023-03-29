@@ -22,9 +22,9 @@ public interface UserRepository extends JpaRepository<User, Integer>{
      @Query(value= "SELECT * FROM Users WHERE rut LIKE ?1", nativeQuery = true)
      List<User> findUserByRut(String rut);
 
+     User findUserByUsername(String username); /* */
 
-
-
+     User findUserByEmail(String email);
 
 
 

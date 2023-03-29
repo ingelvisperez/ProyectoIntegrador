@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import com.generation.simplisoft.model.Order;
+import com.generation.simplisoft.model.OrderRegistroDTO;
 import com.generation.simplisoft.repository.OrderRepository;
 
 @Service
@@ -14,22 +15,23 @@ import com.generation.simplisoft.repository.OrderRepository;
 
 public class OrderService {
 
-     /* 
-        Necesitamos conectar esta clase con la clase repositorio
-        (Lo hacemos declarando una variable de tipo OrderRepository)
-        
-        Asi ésta clase podrá utilizar 
-        los métodos CRUD definidos en la interfaz OrderRepository 
-        para interactuar con la base.
-    */   
+    /*
+     * Necesitamos conectar esta clase con la clase repositorio
+     * (Lo hacemos declarando una variable de tipo OrderRepository)
+     * 
+     * Asi ésta clase podrá utilizar
+     * los métodos CRUD definidos en la interfaz OrderRepository
+     * para interactuar con la base.
+     */
 
     private OrderRepository orderRepository;
 
-    /* Se crea el constructor de esta clase, que tiene como parámetro
+    /*
+     * Se crea el constructor de esta clase, que tiene como parámetro
      * un objeto de tipo OrderRepository.
      * 
      * Esto quiere decir que la instancia OrderService que se crea
-     * tendrá acceso a un objeto de OrderRepository y así poder 
+     * tendrá acceso a un objeto de OrderRepository y así poder
      * interactuar con la base de datos
      */
     public OrderService(OrderRepository orderRepository) {
@@ -41,29 +43,49 @@ public class OrderService {
     /* --------------------------------- */
 
     // Método SAVE: se hereda de la interfaz JpaRepository
-    /*  Este método permite a la esta clase guardar un nuevo objeto order
-        en la BD usando el objeto OrderRepository que se 
-        inyecto en la clase.    
-    */ 
+    /*
+     * Este método permite a la esta clase guardar un nuevo objeto order
+     * en la BD usando el objeto OrderRepository que se
+     * inyecto en la clase.
+     */
 
-    public void saveOrder(Order order){
-        this.orderRepository.save(order);
+    // public void saveOrder(Order order){
+    // this.orderRepository.save(order);
+    // }
+
+    // Método para crear una nueva orden
+    public Order createOrder(OrderRegistroDTO orderRegistroDTO) {
+        Order orderCreation = new Order();
+        orderCreation.setCommentInitial(orderRegistroDTO.getCommentInitial());
+        orderCreation.setCommentTechnical(orderRegistroDTO.getCommentTechnical());
+        orderCreation.setCommentClient(orderRegistroDTO.getCommentClient());
+        orderCreation.setFiles(orderRegistroDTO.getFiles());
+        orderCreation.setStatusOrder(orderRegistroDTO.getStatusOrder());
+        orderCreation.setOrderCreationDate(orderRegistroDTO.getOrderCreationDate());
+        orderCreation.setOrderCloseDate(orderRegistroDTO.getOrderCloseDate());
+        orderCreation.setFkIdDevice(orderRegistroDTO.getFkIdDevice());
+        orderCreation.setFkIdTicket(orderRegistroDTO.getFkIdTicket());
+
+        return orderRepository.save(orderCreation);
     }
 
     // Método ACTUALIZAR/EDITAR/UPDATE
-    public void updateOrder(Order order){
+    public void updateOrder(Order order) {
         this.orderRepository.save(order);
     }
 
     // Método para BORRAR/DELETE
-    public void deleteOrder(Integer id){
+    public void deleteOrder(Integer id) {
         orderRepository.deleteById(id);
     }
 
-    //Método para BUSCAR/ENCONTRAR a TODOS
-    public List<Order> findAll(){
+    // Método para BUSCAR/ENCONTRAR a TODOS
+    public List<Order> findAll() {
         return orderRepository.findAll();
     }
 
+    // Método que dice la cantidad de ordenes totales
 
+    
+    
 }
