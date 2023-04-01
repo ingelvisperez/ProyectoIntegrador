@@ -78,4 +78,9 @@ public class DeviceService {
         return deviceRepository.findAllDevicesByUsername(username);
     }
 
+    // Método para saber la cantidad de equipos totales
+    public Integer numberOfDevices(){
+        return deviceRepository.numberOfDevices();
+    }
+
 }

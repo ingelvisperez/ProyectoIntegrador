@@ -87,4 +87,20 @@ public class DeviceController {
         return deviceService.findAllDevicesByUsername(username);
     }
 
-}
+    // GET: Retorna cantidad de equipos totales
+    @GetMapping("/device/total")
+    public Integer numberOfDevices(){
+        return deviceService.numberOfDevices();
+    }
+
+
+
+
+
+
+
+
+
+
+
+}//fin
