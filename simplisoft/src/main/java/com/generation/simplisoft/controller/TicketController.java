@@ -105,6 +105,11 @@ public class TicketController {
         return ticketService.numberOfTicketsByUsername(username);
     }
 
+    // GET: Retorna cantidad de tickets por status
+    @GetMapping("/ticket/totalByStatus/{status}")
+    public Integer numberOfTicketByStatus(@PathVariable String status){
+        return ticketService.numberOfTicketByStatus(status);
+    }
 
 
     

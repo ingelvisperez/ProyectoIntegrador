@@ -31,7 +31,9 @@ public interface TicketRepository extends JpaRepository<Ticket, Integer>{
     @Query(value = "SELECT COUNT(*) FROM Tickets INNER JOIN Users ON Users.id_user =Tickets.fk_id_ticketuser WHERE Users.user_name LIKE ?1", nativeQuery = true)
     Integer numberOfTicketsByUsername(String username);
 
-
+    // Query para saber la cantidad de Tickets por status
+    @Query(value = "SELECT COUNT(*) FROM Tickets WHERE Tickets.ticket_status LIKE ?1", nativeQuery = true)
+    Integer numberOfTicketByStatus(String status);
 
 
 }// fin de ticketRepository

@@ -70,7 +70,11 @@ public class TicketService {
         return ticketRepository.numberOfTicketsByUsername(username);
     }
 
-
+    // Retorna la cantidad de tickets por status
+    public Integer numberOfTicketByStatus(String status){
+        return ticketRepository.numberOfTicketByStatus(status);
+    }
+    
 
 
 
