@@ -25,4 +25,12 @@ public interface DeviceRepository extends JpaRepository<Device, Integer> {
     @Query(value = "SELECT COUNT(*) FROM devices", nativeQuery = true)
     Integer numberOfDevices();
 
+    // Query para saber la cantidad de equipos asociado a un username
+    @Query(value = "SELECT COUNT(*) FROM Devices INNER JOIN Users ON Users.id_user = Devices.fk_id_user WHERE  Users.user_name LIKE ?1", nativeQuery = true)
+    Integer numberOfDevicesByUsername(String username);
+
+
+
+
+
 }// fin

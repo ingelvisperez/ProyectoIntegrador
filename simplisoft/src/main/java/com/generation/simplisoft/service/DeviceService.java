@@ -83,4 +83,12 @@ public class DeviceService {
         return deviceRepository.numberOfDevices();
     }
 
-}
+    // Método para saber la cantidad de equipos asociados a un username
+    public Integer numberOfTicketByStatus(String username){
+        return deviceRepository.numberOfDevicesByUsername(username) ;
+    }
+
+
+
+
+}//fin

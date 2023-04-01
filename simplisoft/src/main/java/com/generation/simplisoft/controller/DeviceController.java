@@ -93,7 +93,11 @@ public class DeviceController {
         return deviceService.numberOfDevices();
     }
 
-
+    // GET: Retorna cantidad de equipos asociados a un username
+    @GetMapping("/device/totalByUser/{username}")
+    public Integer numberOfTicketByStatus(@PathVariable String username){
+        return deviceService.numberOfTicketByStatus(username);
+    }
 
 
 
