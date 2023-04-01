@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.generation.simplisoft.model.Ticket;
 import com.generation.simplisoft.model.User;
 import com.generation.simplisoft.model.UserRegistroDTO;
 import com.generation.simplisoft.service.MyUserDetailsService;
@@ -63,11 +64,13 @@ public class AuthController {
         myUserDetailsService.deleteUser(id);
     }
 
+        
     // GET: Para obtener datos de la BD
     @GetMapping("/FindAll")
     public List<User> getUser() {
         return myUserDetailsService.findAll();
     }
+
 
     // GET: Para obtener los datos de un usuario usando el ID
     @GetMapping("/FindUserById/{id_user}")
@@ -80,5 +83,19 @@ public class AuthController {
     public List<User> getUserByRut(@PathVariable String rut) {
         return myUserDetailsService.findUserByRut(rut);
     }
+
+    // /* YOUTUBE: CODIGO DE PRUEBA SIGUIENDO YOUTUBE */
+    // @RequestMapping("/")
+    // public String verPaginaDeInicio(Model model){
+    //     List<User> listUsers = myUserDetailsService.findAll();
+    //     model.addAttribute("listUsers", listUsers);
+    //     return "index";
+
+    //  // GET: Para obtener los Tickets de un usuario
+    //  @GetMapping("/findAllTicketsByUser/{user_name}")
+    //  public List<Ticket> getTicketsByUser(@PathVariable String user_name) {
+    //      return myUserDetailsService.findAllTicketsByUser(user_name);
+    //  }   
+
 
 } // Fin de AuthController

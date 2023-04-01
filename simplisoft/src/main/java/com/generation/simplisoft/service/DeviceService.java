@@ -73,4 +73,9 @@ public class DeviceService {
         return deviceRepository.findAll();
     }
 
+    // Método para buscar los equipos asociados a un username
+    public List<Device> findAllDevicesByUsername(String username){
+        return deviceRepository.findAllDevicesByUsername(username);
+    }
+
 }

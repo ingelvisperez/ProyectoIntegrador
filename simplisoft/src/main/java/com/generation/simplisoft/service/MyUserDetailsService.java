@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.generation.simplisoft.model.Ticket;
 import com.generation.simplisoft.model.User;
 import com.generation.simplisoft.model.UserRegistroDTO;
 import com.generation.simplisoft.repository.UserRepository;
@@ -69,5 +70,7 @@ public class MyUserDetailsService implements UserDetailsService {
     public List<User> findUserByRut(String rut) {
         return userRepository.findUserByRut(rut);
     }
+
+
 
 }// Fin de MyUserDetailsService

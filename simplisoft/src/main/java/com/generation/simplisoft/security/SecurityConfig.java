@@ -28,6 +28,7 @@ public class SecurityConfig {
             .antMatchers("/auth/**").permitAll()
             .antMatchers("/device/**").permitAll()
             .antMatchers("/order/**").permitAll()
+            .antMatchers("/ticket/**").permitAll()
             .anyRequest().authenticated();
 
         return http.build();

@@ -3,6 +3,7 @@ package com.generation.simplisoft.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -36,19 +37,19 @@ Java serializados en formato JSON o XML.
 @RestController
 
 public class TicketController {
-    
+
     public TicketService ticketService;
-    
+
     /*
-    * Se inicia el Constructor
-    * La anotación @Autowired se puede usar en el constructor
-    * para inyectar la instancia de
-    * TicketService en la variable de instancia ticketService.
-    * 
-    * Esto se hace mediante la funcionalidad de la inyección de
-    * dependencias de Spring Framework.
-    */
-    
+     * Se inicia el Constructor
+     * La anotación @Autowired se puede usar en el constructor
+     * para inyectar la instancia de
+     * TicketService en la variable de instancia ticketService.
+     * 
+     * Esto se hace mediante la funcionalidad de la inyección de
+     * dependencias de Spring Framework.
+     */
+
     public TicketController(@Autowired TicketService ticketService) {
         this.ticketService = ticketService;
     }
@@ -56,28 +57,55 @@ public class TicketController {
     /* Métodos POST / GET / DELETE / PUT */
     /* --------------------------------- */
 
-    // POST: Para ingresar datos a la BD
+    // POST: Se usa para Registrar un tickets
     @PostMapping("/ticket/save")
     public void saveTicket(@RequestBody Ticket ticket) {
         ticketService.saveTicket(ticket);
     }
 
-    // PUT: Para editar datos en la BD
+    // PUT: Se usa para editar un ticket
     @PutMapping("/ticket/Update")
     public void updateTicket(@RequestBody Ticket ticket) {
         ticketService.updateTicket(ticket);
     }
 
-    // DELETE: Eliminar/Borrar datos de BD
+    // DELETE: Eliminar/Borrar un ticket asociado a un id
     @DeleteMapping("/ticket/Delete/{id}")
     public void deleteTicket(@PathVariable Integer id) {
         ticketService.deleteTicket(id);
     }
 
-    // GET: Para obtener datos de la BD
+    // GET: Retorna todos los tickets
     @GetMapping("/ticket/FindAll")
     public List<Ticket> getTicket() {
         return ticketService.findAll();
-    }  
-      
-}
+    }
+
+    // GET: Retorna los id_tickets asociados a un username
+    @GetMapping("/ticket/id/{username}")
+    public List<Integer> getTicketIdWithUsername(@PathVariable String username) {
+        return ticketService.findTicketIdByUsername(username);
+    }
+
+    // GET: Retorna los tickets asociados a un username
+    @GetMapping("/ticket/{username}")
+    public List<Ticket> getAllTicketByUsername(@PathVariable String username) {
+        return ticketService.findAllTicketByUsername(username);
+    }
+
+    // GET: Retorna cantidad de tickets totales
+    @GetMapping("/ticket/total")
+    public Integer  numberOfTickets(){
+        return ticketService.numberOfTickets();
+    }
+
+    // GET: Retorna cantidad de tickets asociados a un usuario
+    @GetMapping("/ticket/totalByUser/{username}")
+    public Integer numberOfTicketsByUsername(@PathVariable String username){
+        return ticketService.numberOfTicketsByUsername(username);
+    }
+
+
+
+    
+}// fin del ticketController

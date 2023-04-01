@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import com.generation.simplisoft.model.Ticket;
 import com.generation.simplisoft.model.User;
 
 /*  
@@ -22,9 +23,10 @@ public interface UserRepository extends JpaRepository<User, Integer>{
      @Query(value= "SELECT * FROM Users WHERE rut LIKE ?1", nativeQuery = true)
      List<User> findUserByRut(String rut);
 
-     User findUserByUsername(String username); /* */
+     User findUserByUsername(String username);
 
      User findUserByEmail(String email);
+
 
 
 

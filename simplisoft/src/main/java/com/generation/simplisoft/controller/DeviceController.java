@@ -57,28 +57,34 @@ public class DeviceController {
     /* Métodos POST / GET / DELETE / PUT */
     /* --------------------------------- */
 
-    // POST: Para ingresar/registrar datos a la BD
+    // POST: Método para ingresar/registrar datos a la BD
     @PostMapping("/device/register")
     public void registerDevice(@RequestBody DeviceRegistroDTO deviceRegistroDTO) {
         deviceService.createDevice(deviceRegistroDTO);
     }
 
-    // PUT: Para editar datos en la BD
-    @PutMapping("/device/Update")
+    // PUT: Método para editar un equipo en la BD
+    @PutMapping("/device/update")
     public void updateDevice(@RequestBody Device device) {
         deviceService.updateDevice(device);
     }
 
-    // DELETE: Eliminar/Borrar datos de BD
-    @DeleteMapping("/device/Delete/{id}")
+    // DELETE: Método para Eliminar/Borrar un equipo 
+    @DeleteMapping("/device/delete/{id}")
     public void deleteDevice(@PathVariable Integer id) {
         deviceService.deleteDevice(id);
     }
 
-    // GET: Para obtener datos de la BD
-    @GetMapping("/device/FindAll")
+    // GET: Método que retorna todos los equipos
+    @GetMapping("/device/findAll")
     public List<Device> getDevice() {
         return deviceService.findAll();
+    }
+
+    // GET: Métod que retorna todos los equipos asociados a un username
+    @GetMapping("/device/{username}")
+    public List<Device>findAllDevicesByUsername(@PathVariable String username) {
+        return deviceService.findAllDevicesByUsername(username);
     }
 
 }
