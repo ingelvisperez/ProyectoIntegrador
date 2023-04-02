@@ -56,25 +56,25 @@ public class RoleController {
     /* --------------------------------- */
 
     // POST: Para ingresar datos a la BD
-    @PostMapping("/role/save")
+    @PostMapping("/role/register")
     public void saveRole(@RequestBody Role role) {
         roleService.saveRole(role);
     }
 
     // PUT: Para editar datos en la BD
-    @PutMapping("/role/Update")
+    @PutMapping("/role/update")
     public void updateRole(@RequestBody Role role) {
         roleService.updateRole(role);
     }
 
     // DELETE: Eliminar/Borrar datos de BD
-    @DeleteMapping("/role/Delete/{id}")
+    @DeleteMapping("/role/delete/{id}")
     public void deleteRole(@PathVariable Integer id) {
         roleService.deleteRole(id);
     }
 
     // GET: Para obtener datos de la BD
-    @GetMapping("/role/FindAll")
+    @GetMapping("/role/findAll")
     public List<Role> getRole() {
         return roleService.findAll();
     }

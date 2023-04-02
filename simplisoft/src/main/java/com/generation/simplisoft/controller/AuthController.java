@@ -53,49 +53,37 @@ public class AuthController {
     }
 
     // PUT: Para editar datos en la BD
-    @PutMapping("/Update")
+    @PutMapping("/update")
     public void updateUser(@RequestBody User user) {
         myUserDetailsService.updateUser(user);
     }
 
     // DELETE: Eliminar/Borrar datos de BD
-    @DeleteMapping("/Delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteUser(@PathVariable Integer id) {
         myUserDetailsService.deleteUser(id);
     }
 
         
-    // GET: Para obtener datos de la BD
-    @GetMapping("/FindAll")
+    // GET: Para obtener Usuarios registrados en la BD
+    @GetMapping("/findAll")
     public List<User> getUser() {
         return myUserDetailsService.findAll();
     }
 
 
     // GET: Para obtener los datos de un usuario usando el ID
-    @GetMapping("/FindUserById/{id_user}")
+    @GetMapping("/findUserById/{id_user}")
     public List<User> getUserById(@PathVariable Integer id_user) {
         return myUserDetailsService.findUserById(id_user);
     }
 
     // GET: Para obtener los datos de un usuario usando el Rut
-    @GetMapping("/FindUserByRut/{rut}")
+    @GetMapping("/findUserByRut/{rut}")
     public List<User> getUserByRut(@PathVariable String rut) {
         return myUserDetailsService.findUserByRut(rut);
     }
-
-    // /* YOUTUBE: CODIGO DE PRUEBA SIGUIENDO YOUTUBE */
-    // @RequestMapping("/")
-    // public String verPaginaDeInicio(Model model){
-    //     List<User> listUsers = myUserDetailsService.findAll();
-    //     model.addAttribute("listUsers", listUsers);
-    //     return "index";
-
-    //  // GET: Para obtener los Tickets de un usuario
-    //  @GetMapping("/findAllTicketsByUser/{user_name}")
-    //  public List<Ticket> getTicketsByUser(@PathVariable String user_name) {
-    //      return myUserDetailsService.findAllTicketsByUser(user_name);
-    //  }   
+ 
 
 
 } // Fin de AuthController

@@ -37,19 +37,19 @@ Java serializados en formato JSON o XML.
 @RestController
 
 public class OrderController {
-    
+
     public OrderService orderService;
-    
+
     /*
-    * Se inicia el Constructor
-    * La anotación @Autowired se puede usar en el constructor
-    * para inyectar la instancia de
-    * OrderService en la variable de instancia orderService.
-    * 
-    * Esto se hace mediante la funcionalidad de la inyección de
-    * dependencias de Spring Framework.
-    */
-    
+     * Se inicia el Constructor
+     * La anotación @Autowired se puede usar en el constructor
+     * para inyectar la instancia de
+     * OrderService en la variable de instancia orderService.
+     * 
+     * Esto se hace mediante la funcionalidad de la inyección de
+     * dependencias de Spring Framework.
+     */
+
     public OrderController(@Autowired OrderService orderService) {
         this.orderService = orderService;
     }
@@ -76,8 +76,33 @@ public class OrderController {
     }
 
     // GET: Para obtener datos de la BD
-    @GetMapping("/order/FindAll")
+    @GetMapping("/order/findAll")
     public List<Order> getOrder() {
         return orderService.findAll();
     }
-}
+
+    // GET: que retorna la orden asociada a un ticket
+    @GetMapping("/order/findByIdTicket/{id_ticket}")
+    public List<Order> findOrderByIdTicket(@PathVariable Integer id_ticket) {
+        return orderService.findOrderByIdTicket(id_ticket);
+    }
+
+    // GET: que retorna los id_order asociados a un ticket
+    @GetMapping("/order/findIds/{id_ticket}")
+    public List<Integer> findIdOrderByIdTicket(@PathVariable Integer id_ticket) {
+        return orderService.findIdOrderByIdTicket(id_ticket);
+    }
+
+    // GET: que retorna la cantidad de ordenes en la DB
+    @GetMapping("/order/total")
+    public Integer numberOfOrders() {
+        return orderService.numberOfOrders();
+    }
+
+    // GET: que retorna la cantidad de ordenes por status
+    @GetMapping("/order/totalByStatus/{status}")
+    public Integer numberOfOrdersByStatus(@PathVariable String status){
+        return orderService.numberOfOrdersByStatus(status);
+    }
+
+}// fin

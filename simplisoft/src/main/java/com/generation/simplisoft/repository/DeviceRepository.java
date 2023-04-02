@@ -15,22 +15,28 @@ import com.generation.simplisoft.model.Device;
 
 public interface DeviceRepository extends JpaRepository<Device, Integer> {
 
-    // @Query(Value = "", nativeQuery = true)
+    // @Query(value = "", nativeQuery = true)
 
     // Query para buscar los equipos asociados a un username
     @Query(value = "SELECT devices.id_device, devices.device_type, devices.device_brand, devices.device_model, devices.serial_number, devices.fk_id_user FROM devices INNER JOIN Users ON Users.id_user = devices.fk_id_user WHERE Users.user_name LIKE ?1", nativeQuery = true)
     List<Device> findAllDevicesByUsername(String username);
-
-    // Query para saber la cantidad de equipos totales
-    @Query(value = "SELECT COUNT(*) FROM devices", nativeQuery = true)
-    Integer numberOfDevices();
-
+    
     // Query para saber la cantidad de equipos asociado a un username
     @Query(value = "SELECT COUNT(*) FROM Devices INNER JOIN Users ON Users.id_user = Devices.fk_id_user WHERE  Users.user_name LIKE ?1", nativeQuery = true)
     Integer numberOfDevicesByUsername(String username);
 
+    // Query para saber la cantidad de equipos registrado en la DB
+    @Query(value = "SELECT COUNT(*) FROM devices", nativeQuery = true)
+    Integer numberOfDevices();
+
+    // -- Query que retorna el equipo asociado a una orden a través del id_order
+    
+    @Query(value = "SELECT * FROM Devices INNER JOIN Orders ON Devices.id_device = Orders.fk_id_device WHERE Orders.id_order_service LIKE ?1", nativeQuery = true)
+    Device findDeviceByOrder(Integer id_order);
 
 
 
 
+
+    
 }// fin

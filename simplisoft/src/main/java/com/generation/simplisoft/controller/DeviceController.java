@@ -86,6 +86,11 @@ public class DeviceController {
     public List<Device>findAllDevicesByUsername(@PathVariable String username) {
         return deviceService.findAllDevicesByUsername(username);
     }
+    // GET: Retorna cantidad de equipos asociados a un username
+    @GetMapping("/device/totalByUser/{username}")
+    public Integer numberOfTicketByStatus(@PathVariable String username){
+        return deviceService.numberOfTicketByStatus(username);
+    }
 
     // GET: Retorna cantidad de equipos totales
     @GetMapping("/device/total")
@@ -93,13 +98,12 @@ public class DeviceController {
         return deviceService.numberOfDevices();
     }
 
-    // GET: Retorna cantidad de equipos asociados a un username
-    @GetMapping("/device/totalByUser/{username}")
-    public Integer numberOfTicketByStatus(@PathVariable String username){
-        return deviceService.numberOfTicketByStatus(username);
+
+    // GET: Retorna el equipo asociado a una orden a través del id_order
+    @GetMapping("/device/byOrder/{id_order}")
+    public Device findDeviceByOrder(@PathVariable Integer id_order) {
+        return deviceService.findDeviceByOrder(id_order);
     }
-
-
 
 
 

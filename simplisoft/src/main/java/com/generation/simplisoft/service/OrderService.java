@@ -84,7 +84,31 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
-    // Método que dice la cantidad de ordenes totales
+    // Método que retorna la orden asociada a un ticket
+    public List<Order>  findOrderByIdTicket(Integer id_ticket){
+        return orderRepository.findOrderByIdTicket(id_ticket);
+    }
+
+    // Método que retorna los id_order asociados a un ticket
+    public List<Integer> findIdOrderByIdTicket(Integer id_ticket){
+        return orderRepository.findIdOrderByIdTicket(id_ticket);
+    }
+
+    // Método para saber la cantidad de ordenes totales en BD
+    public Integer numberOfOrders(){
+        return orderRepository.numberOfOrders();
+    }
+
+    // Método para saber la cantidad de ordenes por status
+    public Integer numberOfOrdersByStatus(String status){
+        return orderRepository.numberOfOrdersByStatus(status);
+    }
+
+
+
+
+    // Método para saber la cantidad de Ordenes asociadas a un status
+
 
     
     

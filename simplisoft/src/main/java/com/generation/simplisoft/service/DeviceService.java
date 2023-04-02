@@ -88,7 +88,10 @@ public class DeviceService {
         return deviceRepository.numberOfDevicesByUsername(username) ;
     }
 
-
+    // Método que retorna el equipo asociado a una orden a través del id_order
+    public Device findDeviceByOrder(Integer id_order){
+        return deviceRepository.findDeviceByOrder(id_order);
+    }
 
 
 }//fin

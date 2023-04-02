@@ -64,19 +64,19 @@ public class TicketController {
     }
 
     // PUT: Se usa para editar un ticket
-    @PutMapping("/ticket/Update")
+    @PutMapping("/ticket/update")
     public void updateTicket(@RequestBody Ticket ticket) {
         ticketService.updateTicket(ticket);
     }
 
     // DELETE: Eliminar/Borrar un ticket asociado a un id
-    @DeleteMapping("/ticket/Delete/{id}")
+    @DeleteMapping("/ticket/delete/{id}")
     public void deleteTicket(@PathVariable Integer id) {
         ticketService.deleteTicket(id);
     }
 
     // GET: Retorna todos los tickets
-    @GetMapping("/ticket/FindAll")
+    @GetMapping("/ticket/findAll")
     public List<Ticket> getTicket() {
         return ticketService.findAll();
     }
