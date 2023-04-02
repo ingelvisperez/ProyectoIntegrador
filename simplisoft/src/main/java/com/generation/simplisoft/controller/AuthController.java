@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -67,23 +68,45 @@ public class AuthController {
         
     // GET: Para obtener Usuarios registrados en la BD
     @GetMapping("/findAll")
-    public List<User> getUser() {
+    public List<User> findAll() {
         return myUserDetailsService.findAll();
     }
 
 
     // GET: Para obtener los datos de un usuario usando el ID
     @GetMapping("/findUserById/{id_user}")
-    public List<User> getUserById(@PathVariable Integer id_user) {
+    public List<User> findUserById(@PathVariable Integer id_user) {
         return myUserDetailsService.findUserById(id_user);
     }
 
     // GET: Para obtener los datos de un usuario usando el Rut
     @GetMapping("/findUserByRut/{rut}")
-    public List<User> getUserByRut(@PathVariable String rut) {
+    public List<User> findUserByRut(@PathVariable String rut) {
         return myUserDetailsService.findUserByRut(rut);
     }
- 
 
+    // GET: Para buscar el username y password de un usuario usando el username
+    @GetMapping("/findUserByUsername/{username}")
+    public UserDetails findUserByUsername(@PathVariable String username){
+        return myUserDetailsService.loadUserByUsername(username);
+    }
+ 
+    // GET: Retorna la cantidad de usuarios registrados en la DB
+    @GetMapping("/total")
+    public Integer numberOfUsers(){
+        return myUserDetailsService.numberOfUsers();
+    }
+
+    // GET: Retorna la cantidad de usuarios por role
+    @GetMapping("/totalByRole/{role}")
+    public Integer numberOfUserstByRole(@PathVariable String role){
+       return myUserDetailsService.numberOfUserstByRole(role);
+    }  
+
+    // GET: Retorna a los usuarios segun su role
+    @GetMapping("/byRole/{role}")
+    public List<User> UserstByRole(@PathVariable String role){
+        return myUserDetailsService.UserstByRole(role);
+    }
 
 } // Fin de AuthController

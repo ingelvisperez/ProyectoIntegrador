@@ -9,7 +9,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.generation.simplisoft.model.Ticket;
 import com.generation.simplisoft.model.User;
 import com.generation.simplisoft.model.UserRegistroDTO;
 import com.generation.simplisoft.repository.UserRepository;
@@ -22,15 +21,23 @@ public class MyUserDetailsService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
-    // Método para buscar el usuario por username, haciendo el llamdo al repositorio
+    // Método para buscar el username y password de un usuario usando el username
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findUserByUsername(username);
 
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
                 new ArrayList<>());
-
     }
+    /*  // Método para buscar el email y password de un usuario usando el username
+         @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findUserByUsername(username);
+
+        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(),
+                new ArrayList<>());
+    }
+     */
 
     // Metodo para crear/registrar un usuario
 
@@ -71,6 +78,20 @@ public class MyUserDetailsService implements UserDetailsService {
         return userRepository.findUserByRut(rut);
     }
 
+    // Método que retorna la cantidad de usuarios registrados en DB
+    public Integer numberOfUsers(){
+        return userRepository.numberOfUsers();
+    }
+
+    // Método que retorna la cantidad de Userios por role
+    public Integer numberOfUserstByRole(String role){
+        return userRepository.numberOfUserstByRole(role);
+    }
+
+    // Método que retorna a los usuarios segun su role
+    public List<User> UserstByRole(String role){
+        return userRepository.UserstByRole(role);
+    }
 
 
 }// Fin de MyUserDetailsService
