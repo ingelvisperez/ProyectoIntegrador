@@ -14,6 +14,9 @@ CREATE TABLE Users (
     fk_id_role INTEGER UNSIGNED
 );
 
+ALTER TABLE Users MODIFY COLUMN user_password VARCHAR(350);
+
+
 CREATE TABLE Roles (
 	id_role INTEGER UNSIGNED PRIMARY KEY AUTO_INCREMENT NOT NULL,
 	role_name VARCHAR(50) NOT NULL
@@ -84,6 +87,7 @@ INSERT INTO users(rut, user_name, user_password, email, address, user_status, ph
 ("27854548-2", "Jesus", "123", "jesus@simplisoft.cl", "Santiago - Vitacura", "1", "+56949852785", 1),
 ("26856474-1", "Valeria", "123", "valeria@gmail.com", "Santiago - Calera", "1", "+56949852533", 3);
 SELECT * FROM users;
+SELECT * FROM users WHERE rut LIKE "27854548-2";
 
 SELECT * FROM users INNER JOIN roles ON users.fk_id_role = roles.id_role;
 
@@ -112,13 +116,58 @@ INSERT INTO Orders (comment_initial, comment_technical, comment_client, files, s
 ("Sin Recepcion","Se sustituye módulo Rx","Se deja operativo con módulo Rx nuevo","generation.com","Sin Revisar","2023-03-18 10:22:00", "2023-03-18 17:55:00",5,4),
 ("Sin Recepcion","Se sustituye módulo Rx","Se deja operativo con módulo Rx nuevo","generation.com","Sin Revisar","2023-03-18 10:22:00", "2023-03-18 17:55:00",6,4);
 
-SELECT * FROM Orders;
+INSERT INTO Orders (comment_initial, comment_technical, comment_client, files, status_order, order_creation_date, order_close_date, fk_id_device, fk_id_ticket) VALUES
+("Pantalla rota","Se realiza limpieza de componente sulfatados","Se realiza limpieza a mainboard","google.com","Reparado","2023-02-10 17:15:25","2023-02-12 17:15:25",1,1),
+("TV no enciende","Se realiza limpieza de componente sulfatados","Se realiza soldadura a etapa de alimentacion","youtube.com","En reparación","2023-02-12 17:15:25","2023-02-15 17:15:25",1,1),
+("Sin wifi","Se sustituye módulo wifi","Se deja operativo con módulo wifi nuevo","youtube.com","reparado","2023-03-16 13:30:00", "2023-03-16 18:15:00",3,3);
 
-SELECT * FROM Orders 
-INNER JOIN Tickets ON Tickets.id_ticket = Orders.fk_id_ticket 
-INNER JOIN Users ON Tickets.fk_id_ticketuser = Users.id_user;
+SELECT * FROM Users;
+
+-- Query para buscar los dispositivos asociados a un username.
 
 
+-- Query para buscar todos los id_tickets asociados a un username
+SELECT Tickets.id_ticket FROM Tickets INNER JOIN Users ON Tickets.fk_id_ticketuser = Users.id_user WHERE Users.user_name LIKE "Valeria";
 
+-- Query para buscar los tickets asociados a un username
+SELECT Tickets.id_ticket, Tickets.ticket_creation_date, Tickets.ticket_close_date, Tickets.ticket_status, Tickets.fk_id_ticketuser FROM Tickets 
+INNER JOIN Users ON Tickets.fk_id_ticketuser = Users.id_user WHERE Users.user_name LIKE "Valeria";
 
- 
+-- Query para buscar los equipos asociados a un username
+SELECT devices.device_type, devices.device_brand, devices.device_model, devices.serial_number, devices.fk_id_user FROM devices
+INNER JOIN Users ON Users.id_user = devices.fk_id_user WHERE Users.user_name LIKE "Valeria";
+
+-- Query para saber la cantidad de Tickets totales
+SELECT COUNT(*) FROM Tickets;
+
+-- Query para saber la cantidad de Tickets por status
+SELECT COUNT(*) FROM Tickets WHERE Tickets.ticket_status LIKE "Cerrado";
+
+-- Query para saber la cantidad de Tickets asociado a un username
+SELECT COUNT(*) FROM Tickets INNER JOIN Users ON Users.id_user =Tickets.fk_id_ticketuser WHERE Users.user_name LIKE "Valeria";
+
+-- Query para saber la cantidad de equipos asociados a un username
+SELECT COUNT(*) FROM Devices INNER JOIN Users ON Users.id_user = Devices.fk_id_user WHERE  Users.user_name LIKE "Elvis";
+
+-- Query que retorna el equipo asociado a una orden a través del id_order_service
+SELECT * FROM Devices INNER JOIN Orders ON Devices.id_device = Orders.fk_id_device WHERE Orders.id_order_service LIKE 11;
+
+-- Query que retorna los equipos asociados distintas órdenes a través del id_order_service
+SELECT Devices.id_device, Devices.device_type, Devices.device_brand, Devices.device_model, Devices.serial_number FROM Devices 
+INNER JOIN Orders ON Devices.id_device = Orders.fk_id_device WHERE Orders.id_order_service IN(9,10,11);
+
+-- Query que retorna la orden asociada a un ticket
+SELECT Orders.id_order_service, Orders.comment_initial, Orders.comment_technical, Orders.comment_client, Orders.files, Orders.status_order, Orders.order_creation_date, Orders.order_close_date 
+FROM Orders INNER JOIN Tickets ON Orders.fk_id_ticket  = Tickets.id_ticket WHERE Tickets.id_ticket LIKE 1;
+
+-- Query que retorna los id_order asociados a un ticket
+
+SELECT Orders.id_order_service FROM Orders INNER JOIN Tickets ON Orders.fk_id_ticket  = Tickets.id_ticket WHERE Tickets.id_ticket LIKE 1;
+
+SELECT COUNT(*) FROM Users;
+SELECT * FROM Users;
+
+SELECT COUNT(*) FROM Users INNER JOIN Roles ON Users.fk_id_role = Roles.id_role WHERE Roles.role_name LIKE "Técnico";
+
+SELECT Users.id_user, Users.rut, Users.user_name, Users.user_password, Users.email, Users.address, Users.user_status, Users.phone, Users.fk_id_role FROM Users 
+INNER JOIN Roles ON Users.fk_id_role = Roles.id_role WHERE Roles.role_name LIKE "Cliente";
